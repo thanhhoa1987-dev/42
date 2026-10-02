@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 9 – Reported Speech – 30 Questions</title>
+<style>
+
+:root{
+  --bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#667085;--line:#d9e2ef;
+  --primary:#2457d6;--primary-soft:#eaf0ff;--success:#16794b;--success-soft:#eaf8f0;
+  --warning:#9a6700;--warning-soft:#fff6dd;--danger:#b42318;--danger-soft:#fff0ee;
+  --shadow:0 10px 30px rgba(25,42,70,.08);--radius:18px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:var(--text);background:radial-gradient(circle at top left,rgba(36,87,214,.08),transparent 28rem),var(--bg);
+  line-height:1.55
+}
+button,input{font:inherit}button{cursor:pointer}
+.app{width:min(1240px,calc(100% - 28px));margin:auto;padding:28px 0 56px}
+.hero{
+  background:linear-gradient(135deg,#173f9a,#2f6ce5);color:#fff;border-radius:24px;padding:28px;
+  box-shadow:var(--shadow);margin-bottom:20px
+}
+.hero h1{margin:0 0 8px;font-size:clamp(27px,4vw,42px);line-height:1.12}
+.hero p{margin:0;opacity:.94;max-width:980px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.badge{padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);font-weight:800;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.setup,.guide,.result{padding:22px;margin-bottom:20px}
+h2{margin:0 0 14px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}label{font-weight:800;font-size:14px}
+input[type="text"]{width:100%;border:1px solid #c8d2e2;border-radius:12px;padding:12px 13px;outline:none;background:#fff}
+input[type="text"]:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(36,87,214,.12)}
+
+.theory-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.theory-box{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fbfcff}
+.theory-box h3{margin:0 0 8px}.formula{display:inline-block;background:var(--primary-soft);color:#173f9a;font-weight:900;padding:6px 10px;border-radius:9px;margin:4px 0}
+.theory-box ul{margin:8px 0 0;padding-left:20px}.theory-box li{margin:5px 0}
+.compare{margin-top:14px;border-top:1px solid var(--line);padding-top:14px;overflow-x:auto}
+.compare table{width:100%;border-collapse:collapse;min-width:650px}
+.compare th,.compare td{border:1px solid var(--line);padding:9px;vertical-align:top}
+.compare th{background:#f2f6ff;text-align:left}
+.note{margin-top:14px;padding:12px 14px;border-radius:12px;background:#fffaf0;border:1px solid #ead18c;color:#6f4b00}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.btn{border:none;border-radius:12px;padding:11px 16px;font-weight:900;transition:.18s}
+.btn:hover{transform:translateY(-1px)}.btn-primary{background:var(--primary);color:#fff}.btn-secondary{background:#eef2f7;color:#22304a}.btn-success{background:var(--success);color:#fff}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+.quiz-area{display:none}
+.quiz-layout{display:grid;grid-template-columns:310px minmax(0,1fr);gap:18px;align-items:start}
+.sidebar{position:sticky;top:14px;padding:16px;max-height:calc(100vh - 28px);overflow:auto}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{border:1px solid var(--line);border-radius:14px;padding:11px;background:#fbfcff}
+.stat small{display:block;color:var(--muted);font-weight:800}.stat strong{display:block;font-size:20px;margin-top:3px}
+.progress-track{height:10px;background:#e9eef6;border-radius:999px;overflow:hidden;margin:10px 0 6px}
+.progress-bar{height:100%;width:0;background:linear-gradient(90deg,#2457d6,#5a87f0);transition:.25s}
+.progress-text{font-size:13px;color:var(--muted);font-weight:800}
+.palette{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:12px}
+.qnav{height:32px;border:1px solid #cad4e3;background:#fff;border-radius:8px;font-weight:900;color:#4a5870;font-size:13px}
+.qnav.answered{background:var(--primary-soft);border-color:#9eb8f7;color:#173f9a}.qnav.active{outline:3px solid rgba(36,87,214,.16)}
+.section-nav{margin-top:14px;display:grid;gap:6px}.section-nav button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px;text-align:left;font-weight:800;color:#344054}
+
+.section-title{padding:14px 18px;background:#eaf0ff;border:1px solid #bfd0fb;border-radius:14px;color:#173f9a;font-weight:900;font-size:18px;scroll-margin-top:14px}
+.questions{display:flex;flex-direction:column;gap:14px}
+.question-card{padding:19px;scroll-margin-top:14px}
+.qhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px}
+.qnum{font-weight:900;font-size:18px}.topic-badge{font-size:12px;font-weight:900;padding:5px 9px;border-radius:999px;background:#eef3ff;color:#1d4ab5;white-space:nowrap}
+.instruction{display:inline-block;margin:4px 0 8px;padding:5px 9px;border-radius:8px;background:#fff4d6;color:#795000;font-weight:900;font-size:13px}
+.prompt{font-size:17px;font-weight:750;margin:8px 0 12px}
+.text-answer{max-width:800px}.helper{font-size:13px;color:var(--muted);margin-top:6px}
+.mc-options{display:grid;grid-template-columns:1fr 1fr;gap:9px;max-width:950px}.mc-option{display:flex;align-items:flex-start;gap:9px;border:1px solid #cfd9e8;border-radius:12px;padding:10px 12px;background:#fff;font-weight:700}.mc-option:hover{border-color:#9eb8f7;background:#f8faff}.mc-option input{margin-top:4px;accent-color:var(--primary)}
+.submit-wrap{padding:18px;margin-top:16px;display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+
+.result{display:none;margin-top:20px}
+.result-top{display:grid;grid-template-columns:160px 1fr;gap:20px;align-items:center}
+.score-ring{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;position:relative}
+.score-ring::after{content:"";width:118px;height:118px;border-radius:50%;background:#fff;position:absolute}
+.score-inner{position:relative;z-index:1;text-align:center}.score-inner strong{font-size:34px;display:block;line-height:1}.score-inner span{font-size:13px;color:var(--muted);font-weight:800}
+.status{display:inline-flex;padding:7px 11px;border-radius:999px;font-weight:900;font-size:14px;margin-bottom:8px}
+.status.pass{background:var(--success-soft);color:var(--success)}.status.fail{background:var(--danger-soft);color:var(--danger)}
+.alert{border-radius:14px;padding:14px 16px;margin:16px 0;border:1px solid}
+.alert.fail{background:var(--danger-soft);border-color:#f0b8b3;color:#7a271a}.alert.pass{background:var(--success-soft);border-color:#a9dfc3;color:#125a39}.alert.warn{background:var(--warning-soft);border-color:#ead18c;color:#6f4b00}
+.diag-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
+.diag-card{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fbfcff}.diag-card h4{margin:0 0 6px}.diag-card p{margin:5px 0;color:#48566f}
+.diag-meter{height:8px;background:#e9eef6;border-radius:999px;overflow:hidden;margin:8px 0}.diag-meter span{display:block;height:100%;background:#2457d6}
+.review-list{display:grid;gap:12px;margin-top:14px}.review-item{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff}.review-item.correct{border-left:5px solid var(--success)}.review-item.wrong{border-left:5px solid var(--danger)}
+.review-item h4{margin:0 0 8px}.review-item p{margin:5px 0}
+.hidden{display:none!important}.footer-note{text-align:center;color:var(--muted);font-size:13px;margin-top:20px}
+
+
+.review-confirm{display:flex;gap:9px;align-items:flex-start;margin-top:10px;padding:10px 12px;border-radius:10px;background:#f7f9fc;border:1px solid var(--line);font-weight:800}
+.review-confirm input{margin-top:4px;transform:scale(1.15)}
+.mastery-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 18px}
+.mastery-step{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fbfcff}.mastery-step strong{display:block;margin-bottom:3px}
+.correction-area{margin-top:18px;padding-top:4px}.correction-list{display:grid;gap:12px;margin-top:12px}
+.correction-card{border:1px solid var(--line);border-radius:14px;padding:15px;background:#fff}.correction-card.good{border-left:5px solid var(--success);background:#fbfffd}.correction-card.bad{border-left:5px solid var(--warning);background:#fffdf7}
+.correction-card h4{margin:0 0 7px}.correction-card input{width:100%;border:1px solid #c8d2e2;border-radius:11px;padding:11px 12px;margin-top:8px}.correction-card input:disabled{background:#eef8f3;color:#125a39;font-weight:800}
+.completion-banner{border:2px solid #73c89e;background:linear-gradient(135deg,#effbf5,#f9fffc);border-radius:18px;padding:18px;margin-top:18px}.completion-banner h3{margin:0 0 8px;color:#125a39;font-size:24px}
+.verify-code{display:inline-block;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#14213d;color:#fff;padding:8px 11px;border-radius:9px;font-weight:900;letter-spacing:.06em}
+.teacher-report{margin-top:12px;border:1px dashed #aebbd0;border-radius:12px;padding:12px;background:#f8fafc}.teacher-report p{margin:4px 0}
+.lock-note{font-size:13px;color:var(--muted);margin-top:8px}
+@media(max-width:720px){.mastery-steps{grid-template-columns:1fr}}
+
+@media(max-width:900px){.quiz-layout{grid-template-columns:1fr}.sidebar{position:static;max-height:none}.theory-grid,.diag-grid{grid-template-columns:1fr}}
+@media(max-width:620px){.form-grid,.mc-options{grid-template-columns:1fr}.result-top{grid-template-columns:1fr;text-align:center}.score-ring{margin:auto}.app{width:min(100% - 18px,1240px);padding-top:10px}.palette{grid-template-columns:repeat(7,1fr)}}
+@media print{body{background:#fff}.hero,.setup,.guide,.quiz-area,.footer-note,.no-print{display:none!important}.app{width:100%;padding:0}.result{display:block!important;box-shadow:none;border:none;padding:0}.review-item,.diag-card,.alert{break-inside:avoid}}
+
+</style>
+</head>
+<body>
+<div id="toast" class="toast"></div>
+<main class="app">
+
+<section class="hero">
+  <h1>REPORTED SPEECH – PRACTICE</h1>
+  <p>Statements, Yes/No &amp; WH-questions, commands/requests and common reporting verbs.</p>
+  <div class="badges">
+    <span class="badge">⏱ 45 phút</span>
+    <span class="badge">📝 30 câu</span>
+    <span class="badge">🎯 Grade 9 – A2+</span>
+    <span class="badge">✅ Đạt từ 7.0</span>
+    <span class="badge">🔁 Có Correction Check bắt buộc khi còn lỗi</span>
+  </div>
+</section>
+
+<section class="setup card" id="setup">
+  <h2>Thông tin học sinh</h2>
+  <div class="form-grid">
+    <div class="field"><label for="studentName">Họ và tên *</label><input id="studentName" type="text" placeholder="Ví dụ: Nguyễn Minh Anh"></div>
+    <div class="field"><label for="studentClass">Lớp *</label><input id="studentClass" type="text" placeholder="Ví dụ: 9A1"></div>
+    <div class="field"><label for="studentCode">Số thứ tự / Mã học sinh</label><input id="studentCode" type="text" placeholder="Ví dụ: 12"></div>
+    <div class="field"><label>Gửi kết quả</label><div id="sheetConnection" style="padding:12px 13px;border:1px solid #c8d2e2;border-radius:12px;background:#fbfcff;font-weight:800;color:#667085">Đang kiểm tra kết nối Google Sheet…</div></div>
+  </div>
+</section>
+
+<section class="guide card" id="guide">
+  <h2>Kiến thức cần nhớ trước khi làm</h2>
+  <div class="theory-grid">
+    <article class="theory-box">
+      <h3>1. Statements</h3>
+      <div class="formula">S + said (that) + clause</div>
+      <ul><li>am/is/are → was/were; have/has → had.</li><li>will → would; can → could.</li><li>now → then; today → that day; tomorrow → the next day.</li></ul>
+    </article>
+    <article class="theory-box">
+      <h3>2. Questions</h3>
+      <div class="formula">asked + if/whether/WH-word + S + V</div>
+      <ul><li>Không đảo trợ động từ trong câu gián tiếp.</li><li>Yes/No: dùng if/whether.</li><li>WH-question: giữ từ để hỏi.</li></ul>
+    </article>
+    <article class="theory-box">
+      <h3>3. Commands &amp; requests</h3>
+      <div class="formula">told/asked + O + (not) to + V</div>
+      <ul><li>“Open the door.” → told me to open the door.</li><li>“Don't talk.” → told us not to talk.</li></ul>
+    </article>
+    <article class="theory-box">
+      <h3>4. Reporting verbs</h3>
+      <div class="formula">advise • promise • invite • suggest • admit</div>
+      <ul><li>advise + O + to V; promise + to V.</li><li>invite + O + to V; suggest + V-ing.</li><li>admit + V-ing.</li></ul>
+    </article>
+  </div>
+
+  <div class="note">
+    <b>QUY TẮC NHẬP ĐÁP ÁN:</b><br>
+    • Với câu viết lại, hãy nhập <b>TOÀN BỘ CÂU GIÁN TIẾP HOÀN CHỈNH</b>.<br>
+    • Hệ thống chấp nhận các biến thể đúng có/không có <b>that</b> ở statements và <b>if/whether</b> khi phù hợp.<br>
+    • Không trừ điểm vì viết hoa/viết thường, dấu chấm/dấu hỏi cuối câu hoặc khoảng trắng thừa.<br>
+    • Điểm chỉ hiện sau khi nộp. Dưới 7.0: chỉ xem điểm + phần cần ôn. Từ 7.0 trở lên: xem câu sai, đọc chữa, rồi làm Correction Check nếu còn lỗi.
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" id="startBtn">Bắt đầu làm bài – 45 phút</button>
+  </div>
+</section>
+
+<section class="quiz-area" id="quizArea">
+  <div class="quiz-layout">
+    <aside class="sidebar card">
+      <div class="stat-grid">
+        <div class="stat"><small>Tiến độ</small><strong id="answeredStat">0/30</strong></div>
+        <div class="stat"><small>Điểm</small><strong id="liveScore">Chưa chấm</strong></div>
+        <div class="stat"><small>Thời gian</small><strong id="timer">45:00</strong></div>
+        <div class="stat"><small>Trạng thái</small><strong id="statusStat" style="font-size:16px">Đang làm</strong></div>
+      </div>
+      <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+      <div class="progress-text" id="progressText">Đã trả lời 0/30 câu</div>
+      <div class="palette" id="palette"></div>
+      <div class="section-nav" id="sectionNav"></div>
+    </aside>
+    <div>
+      <div class="questions" id="questions"></div>
+      <div class="submit-wrap card">
+        <button class="btn btn-secondary" id="saveBtn">Lưu tạm trên máy</button>
+        <button class="btn btn-primary" id="submitBtn">Nộp bài & Xem điểm</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="result card" id="result"></section>
+<div class="footer-note">Grade 9 • Reported Speech • 30 questions • 45 minutes • Connected Google Sheet</div>
+</main>
+
+<script>
+(() => {
+const TOTAL_TIME = 45 * 60;
+const PASS_SCORE = 7.0;
+const STORAGE_KEY = "g9_reported_speech_30q_mastery_v1";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzy-9xaWSQVi7p7rodvA_bDtMPrtKWRZDLeQsNzqGl1OO8XLkCJu6rgOj_ZuYli5w5z/exec";
+const QUIZ_ID = "G9_REPORTED_SPEECH_30Q_V1";
+const QUIZ_TITLE = "Grade 9 - Reported Speech Practice - 30 Questions";
+
+const sections = [
+  {id:"statements", title:"Exercise 1 – Reported Statements", group:"statements"},
+  {id:"questions", title:"Exercise 2 – Reported Questions", group:"questions"},
+  {id:"commands", title:"Exercise 3 – Commands and Requests", group:"commands"},
+  {id:"verbs", title:"Exercise 4 – Reporting Verbs", group:"verbs"},
+  {id:"mc", title:"Exercise 5 – Multiple Choice (6 Questions)", group:"mc"}
+];
+
+const groups = {
+  statements:{title:"Reported Statements",review:"Ôn lùi thì, đổi đại từ và trạng từ thời gian/nơi chốn trong câu tường thuật."},
+  questions:{title:"Reported Questions",review:"Yes/No dùng if/whether; WH-question giữ từ để hỏi; trật tự câu gián tiếp là S + V, không đảo trợ động từ."},
+  commands:{title:"Commands and Requests",review:"Dùng told/asked + object + (not) to + V; chú ý đổi đại từ sở hữu cho phù hợp."},
+  verbs:{title:"Reporting Verbs",review:"Ôn advise/encourage/warn/invite + O + to V; promise/offer + to V; suggest/admit/deny + V-ing; accuse + O + of V-ing; apologize for + V-ing."},
+  mc:{title:"Multiple Choice",review:"Ôn lùi thì, đổi đại từ/trạng từ, trật tự câu hỏi gián tiếp, mệnh lệnh và cấu trúc của reporting verbs."}
+};
+
+const qSource = [
+  {id:1,section:"statements",group:"statements",type:"text",prompt:'Emma said, “I am preparing for my English test now.”',answers:["emma said that she was preparing for her english test then","emma said she was preparing for her english test then"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Emma said (that) she was preparing for her English test then.",explanation:"am preparing → was preparing; I/my → she/her; now → then."},
+  {id:2,section:"statements",group:"statements",type:"text",prompt:'The boys said, “We finished the project yesterday.”',answers:["the boys said that they had finished the project the day before","the boys said they had finished the project the day before","the boys said that they had finished the project the previous day","the boys said they had finished the project the previous day"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"The boys said (that) they had finished the project the day before.",explanation:"finished → had finished; we → they; yesterday → the day before/the previous day."},
+  {id:3,section:"statements",group:"statements",type:"text",prompt:'Mia said to me, “I will call you tomorrow.”',answers:["mia told me that she would call me the next day","mia told me she would call me the next day","mia said to me that she would call me the next day","mia said to me she would call me the next day","mia told me that she would call me the following day","mia told me she would call me the following day"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Mia told me (that) she would call me the next day.",explanation:"will → would; I/you → she/me; tomorrow → the next/following day."},
+  {id:4,section:"statements",group:"statements",type:"text",prompt:'Lily said, “My sister has never been abroad.”',answers:["lily said that her sister had never been abroad","lily said her sister had never been abroad"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Lily said (that) her sister had never been abroad.",explanation:"has been → had been; my → her."},
+  {id:5,section:"statements",group:"statements",type:"text",prompt:'Ben said, “I can finish this task today.”',answers:["ben said that he could finish that task that day","ben said he could finish that task that day"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Ben said (that) he could finish that task that day.",explanation:"can → could; this → that; today → that day."},
+
+  {id:6,section:"questions",group:"questions",type:"text",prompt:'The teacher asked Nam, “Where do you usually study after school?”',answers:["the teacher asked nam where he usually studied after school"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"The teacher asked Nam where he usually studied after school.",explanation:"Giữ where; đổi về trật tự S + V và lùi do study → studied."},
+  {id:7,section:"questions",group:"questions",type:"text",prompt:'Mai asked me, “Did you see Anna at the library yesterday?”',answers:["mai asked me if i had seen anna at the library the day before","mai asked me whether i had seen anna at the library the day before","mai asked me if i had seen anna at the library the previous day","mai asked me whether i had seen anna at the library the previous day"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Mai asked me if/whether I had seen Anna at the library the day before.",explanation:"Yes/No question dùng if/whether; did see → had seen; yesterday → the day before."},
+  {id:8,section:"questions",group:"questions",type:"text",prompt:'The manager asked Paul, “Have you finished the report?”',answers:["the manager asked paul if he had finished the report","the manager asked paul whether he had finished the report"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"The manager asked Paul if/whether he had finished the report.",explanation:"Have finished → had finished; dùng if/whether và không đảo trợ động từ."},
+  {id:9,section:"questions",group:"questions",type:"text",prompt:'Mother asked the children, “Why are you laughing?”',answers:["mother asked the children why they were laughing","the mother asked the children why they were laughing"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Mother asked the children why they were laughing.",explanation:"Giữ why; are laughing → were laughing; you → they."},
+  {id:10,section:"questions",group:"questions",type:"text",prompt:'They asked me, “Will you join us tomorrow?”',answers:["they asked me if i would join them the next day","they asked me whether i would join them the next day","they asked me if i would join them the following day","they asked me whether i would join them the following day"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"They asked me if/whether I would join them the next day.",explanation:"will → would; us → them; tomorrow → the next/following day."},
+
+  {id:11,section:"commands",group:"commands",type:"text",prompt:'The teacher told the class, “Open your books.”',answers:["the teacher told the class to open their books"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"The teacher told the class to open their books.",explanation:"Mệnh lệnh khẳng định: told + object + to + V."},
+  {id:12,section:"commands",group:"commands",type:"text",prompt:'My brother told me, “Don’t use my phone.”',answers:["my brother told me not to use his phone"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"My brother told me not to use his phone.",explanation:"Mệnh lệnh phủ định: told + object + not to + V; my → his."},
+  {id:13,section:"commands",group:"commands",type:"text",prompt:'The nurse told the patient, “Wait outside, please.”',answers:["the nurse asked the patient to wait outside","the nurse told the patient to wait outside"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"The nurse asked the patient to wait outside.",explanation:"Lời yêu cầu lịch sự có thể dùng asked + object + to V."},
+  {id:14,section:"commands",group:"commands",type:"text",prompt:'The librarian told the students, “Please don’t make noise.”',answers:["the librarian asked the students not to make noise","the librarian told the students not to make noise"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"The librarian asked the students not to make noise.",explanation:"Yêu cầu phủ định: asked + object + not to + V."},
+  {id:15,section:"commands",group:"commands",type:"text",prompt:'Dad told us, “Turn off the lights before you leave.”',answers:["dad told us to turn off the lights before we left","dad told us to turn off the lights before we leave"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Dad told us to turn off the lights before we left.",explanation:"told + object + to V; you → we; leave thường lùi thành left."},
+
+  {id:16,section:"verbs",group:"verbs",type:"text",prompt:'“You should get more sleep,” the doctor said to me. (ADVISED)',answers:["the doctor advised me to get more sleep"],instruction:"DÙNG TỪ GỢI Ý ĐỂ VIẾT LẠI CÂU",displayAnswer:"The doctor advised me to get more sleep.",explanation:"advise + object + to V."},
+  {id:17,section:"verbs",group:"verbs",type:"text",prompt:'“I’ll help you with the project,” Alex said to me. (PROMISED)',answers:["alex promised to help me with the project"],instruction:"DÙNG TỪ GỢI Ý ĐỂ VIẾT LẠI CÂU",displayAnswer:"Alex promised to help me with the project.",explanation:"promise + to V; you → me."},
+  {id:18,section:"verbs",group:"verbs",type:"text",prompt:'“Would you like to come to my birthday party?” Sara said to Tom. (INVITED)',answers:["sara invited tom to come to her birthday party","sara invited tom to her birthday party"],instruction:"DÙNG TỪ GỢI Ý ĐỂ VIẾT LẠI CÂU",displayAnswer:"Sara invited Tom to come to her birthday party.",explanation:"invite + object + to V; my → her."},
+  {id:19,section:"verbs",group:"verbs",type:"text",prompt:'“Let’s take the bus instead of walking,” Minh said. (SUGGESTED)',answers:["minh suggested taking the bus instead of walking","minh suggested that we take the bus instead of walking","minh suggested that they take the bus instead of walking"],instruction:"DÙNG TỪ GỢI Ý ĐỂ VIẾT LẠI CÂU",displayAnswer:"Minh suggested taking the bus instead of walking.",explanation:"suggest + V-ing; cũng có thể dùng suggest that + clause."},
+  {id:20,section:"verbs",group:"verbs",type:"text",prompt:'“I broke the window,” Jack said. (ADMITTED)',answers:["jack admitted breaking the window","jack admitted having broken the window"],instruction:"DÙNG TỪ GỢI Ý ĐỂ VIẾT LẠI CÂU",displayAnswer:"Jack admitted breaking the window.",explanation:"admit + V-ing (hoặc having + past participle)."},
+
+  {id:21,section:"statements",group:"statements",type:"text",prompt:'Anna said, “We are waiting for the bus now.”',answers:["anna said that they were waiting for the bus then","anna said they were waiting for the bus then"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Anna said (that) they were waiting for the bus then.",explanation:"are waiting → were waiting; we → they; now → then."},
+  {id:22,section:"statements",group:"statements",type:"text",prompt:'David said, “I bought this laptop last week.”',answers:["david said that he had bought that laptop the week before","david said he had bought that laptop the week before","david said that he had bought that laptop the previous week","david said he had bought that laptop the previous week"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"David said (that) he had bought that laptop the week before.",explanation:"bought → had bought; this → that; last week → the week before/the previous week."},
+  {id:23,section:"statements",group:"statements",type:"text",prompt:'Rachel said, “I may visit my grandparents next weekend.”',answers:["rachel said that she might visit her grandparents the following weekend","rachel said she might visit her grandparents the following weekend","rachel said that she might visit her grandparents the next weekend","rachel said she might visit her grandparents the next weekend"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Rachel said (that) she might visit her grandparents the following weekend.",explanation:"may → might; my → her; next weekend → the following weekend."},
+  {id:24,section:"statements",group:"statements",type:"text",prompt:'The teacher said, “The students must submit their assignments today.”',answers:["the teacher said that the students had to submit their assignments that day","the teacher said the students had to submit their assignments that day"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"The teacher said (that) the students had to submit their assignments that day.",explanation:"must → had to trong nghĩa nghĩa vụ; today → that day."},
+  {id:25,section:"statements",group:"statements",type:"text",prompt:'Sam said, “I have been studying for two hours.”',answers:["sam said that he had been studying for two hours","sam said he had been studying for two hours"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Sam said (that) he had been studying for two hours.",explanation:"have been studying → had been studying; I → he."},
+  {id:26,section:"statements",group:"statements",type:"text",prompt:'Hoa said, “My parents are working in Hanoi this month.”',answers:["hoa said that her parents were working in hanoi that month","hoa said her parents were working in hanoi that month"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Hoa said (that) her parents were working in Hanoi that month.",explanation:"are working → were working; my → her; this month → that month."},
+  {id:27,section:"statements",group:"statements",type:"text",prompt:'Nick said, “I didn’t see Peter at the party last night.”',answers:["nick said that he had not seen peter at the party the night before","nick said he had not seen peter at the party the night before","nick said that he hadn't seen peter at the party the night before","nick said he hadn't seen peter at the party the night before","nick said that he had not seen peter at the party the previous night","nick said he had not seen peter at the party the previous night"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Nick said (that) he had not seen Peter at the party the night before.",explanation:"didn't see → had not seen; last night → the night before/the previous night."},
+  {id:28,section:"statements",group:"statements",type:"text",prompt:'Lucy said, “I will send the email tonight.”',answers:["lucy said that she would send the email that night","lucy said she would send the email that night"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Lucy said (that) she would send the email that night.",explanation:"will → would; tonight → that night."},
+
+  {id:29,section:"questions",group:"questions",type:"text",prompt:'Jane asked me, “Could you help me with this box?”',answers:["jane asked me if i could help her with that box","jane asked me whether i could help her with that box"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Jane asked me if/whether I could help her with that box.",explanation:"Yes/No question dùng if/whether; me → her; this → that."},
+  {id:30,section:"questions",group:"questions",type:"text",prompt:'The teacher asked Sarah, “What have you done today?”',answers:["the teacher asked sarah what she had done that day"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"The teacher asked Sarah what she had done that day.",explanation:"Giữ what; have done → had done; today → that day."},
+  {id:31,section:"questions",group:"questions",type:"text",prompt:'Tom asked Lisa, “Are you coming to the party tonight?”',answers:["tom asked lisa if she was coming to the party that night","tom asked lisa whether she was coming to the party that night"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Tom asked Lisa if/whether she was coming to the party that night.",explanation:"Yes/No: if/whether; are coming → was coming; tonight → that night."},
+  {id:32,section:"questions",group:"questions",type:"text",prompt:'He asked, “When will the train arrive?”',answers:["he asked when the train would arrive"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"He asked when the train would arrive.",explanation:"Giữ when; will → would; dùng trật tự the train would arrive."},
+  {id:33,section:"questions",group:"questions",type:"text",prompt:'Mai asked Ben, “How long have you lived here?”',answers:["mai asked ben how long he had lived there","mai asked ben how long he had been living there"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Mai asked Ben how long he had lived there.",explanation:"have lived → had lived; here → there; không đảo trợ động từ."},
+  {id:34,section:"questions",group:"questions",type:"text",prompt:'My mother asked me, “Why did you leave early yesterday?”',answers:["my mother asked me why i had left early the day before","my mother asked me why i had left early the previous day"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"My mother asked me why I had left early the day before.",explanation:"did leave → had left; yesterday → the day before/the previous day."},
+  {id:35,section:"questions",group:"questions",type:"text",prompt:'Peter asked me, “Can your brother drive?”',answers:["peter asked me if my brother could drive","peter asked me whether my brother could drive"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Peter asked me if/whether my brother could drive.",explanation:"can → could; your → my; Yes/No dùng if/whether."},
+  {id:36,section:"questions",group:"questions",type:"text",prompt:'The teacher asked Jane, “Who are you waiting for?”',answers:["the teacher asked jane who she was waiting for"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"The teacher asked Jane who she was waiting for.",explanation:"Giữ who; are waiting → was waiting; dùng trật tự she was waiting."},
+
+  {id:37,section:"commands",group:"commands",type:"text",prompt:'Mum told me, “Don’t forget your passport.”',answers:["mum told me not to forget my passport","mom told me not to forget my passport"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Mum told me not to forget my passport.",explanation:"Mệnh lệnh phủ định: told + object + not to V; your → my."},
+  {id:38,section:"commands",group:"commands",type:"text",prompt:'Anna said to me, “Please send me the file.”',answers:["anna asked me to send her the file","anna told me to send her the file"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Anna asked me to send her the file.",explanation:"Lời yêu cầu lịch sự: asked + object + to V; me → her."},
+  {id:39,section:"commands",group:"commands",type:"text",prompt:'The guide told the visitors, “Keep the door closed.”',answers:["the guide told the visitors to keep the door closed"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"The guide told the visitors to keep the door closed.",explanation:"Mệnh lệnh khẳng định: told + object + to V."},
+  {id:40,section:"commands",group:"commands",type:"text",prompt:'The police officer told the driver, “Don’t park here.”',answers:["the police officer told the driver not to park there","the police officer told the driver not to park here"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"The police officer told the driver not to park there.",explanation:"told + object + not to V; here thường đổi thành there."},
+  {id:41,section:"commands",group:"commands",type:"text",prompt:'The doctor told the patient, “Take this medicine twice a day.”',answers:["the doctor told the patient to take that medicine twice a day","the doctor told the patient to take this medicine twice a day"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"The doctor told the patient to take that medicine twice a day.",explanation:"told + object + to V; this thường đổi thành that."},
+  {id:42,section:"commands",group:"commands",type:"text",prompt:'Anna said to Tom, “Please help me carry this box.”',answers:["anna asked tom to help her carry that box","anna asked tom to help her to carry that box","anna told tom to help her carry that box"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"Anna asked Tom to help her carry that box.",explanation:"asked + object + to V; me → her; this → that."},
+  {id:43,section:"commands",group:"commands",type:"text",prompt:'The coach told the players, “Don’t be late tomorrow.”',answers:["the coach told the players not to be late the next day","the coach told the players not to be late the following day"],instruction:"VIẾT LẠI CÂU HOÀN CHỈNH",displayAnswer:"The coach told the players not to be late the next day.",explanation:"told + object + not to V; tomorrow → the next/following day."},
+
+  {id:44,section:"verbs",group:"verbs",type:"text",prompt:'“Don’t touch that wire,” the electrician said to us. (WARNED)',answers:["the electrician warned us not to touch that wire"],instruction:"DÙNG TỪ GỢI Ý ĐỂ VIẾT LẠI CÂU",displayAnswer:"The electrician warned us not to touch that wire.",explanation:"warn + object + not to V."},
+  {id:45,section:"verbs",group:"verbs",type:"text",prompt:'“You broke my camera,” Kevin said to Lily. (ACCUSED)',answers:["kevin accused lily of breaking his camera","kevin accused lily of having broken his camera"],instruction:"DÙNG TỪ GỢI Ý ĐỂ VIẾT LẠI CÂU",displayAnswer:"Kevin accused Lily of breaking his camera.",explanation:"accuse + object + of + V-ing; my → his."},
+  {id:46,section:"verbs",group:"verbs",type:"text",prompt:'“You should apply for the scholarship,” my teacher said to me. (ENCOURAGED)',answers:["my teacher encouraged me to apply for the scholarship"],instruction:"DÙNG TỪ GỢI Ý ĐỂ VIẾT LẠI CÂU",displayAnswer:"My teacher encouraged me to apply for the scholarship.",explanation:"encourage + object + to V."},
+  {id:47,section:"verbs",group:"verbs",type:"text",prompt:'“No, I didn’t take the money,” Mark said. (DENIED)',answers:["mark denied taking the money","mark denied having taken the money"],instruction:"DÙNG TỪ GỢI Ý ĐỂ VIẾT LẠI CÂU",displayAnswer:"Mark denied taking the money.",explanation:"deny + V-ing (hoặc deny having + past participle)."},
+  {id:48,section:"verbs",group:"verbs",type:"text",prompt:'“I’m sorry I arrived so late,” Jane said. (APOLOGIZED)',answers:["jane apologized for arriving so late","jane apologised for arriving so late","jane apologized for having arrived so late","jane apologised for having arrived so late"],instruction:"DÙNG TỪ GỢI Ý ĐỂ VIẾT LẠI CÂU",displayAnswer:"Jane apologized for arriving so late.",explanation:"apologize for + V-ing."},
+  {id:49,section:"verbs",group:"verbs",type:"text",prompt:'“Why don’t we study together tonight?” Lan said. (SUGGESTED)',answers:["lan suggested studying together that night","lan suggested that they study together that night","lan suggested that we study together that night"],instruction:"DÙNG TỪ GỢI Ý ĐỂ VIẾT LẠI CÂU",displayAnswer:"Lan suggested studying together that night.",explanation:"suggest + V-ing; tonight → that night."},
+  {id:50,section:"verbs",group:"verbs",type:"text",prompt:'“I can carry your bag for you,” David said to me. (OFFERED)',answers:["david offered to carry my bag for me"],instruction:"DÙNG TỪ GỢI Ý ĐỂ VIẾT LẠI CÂU",displayAnswer:"David offered to carry my bag for me.",explanation:"offer + to V; your/you → my/me."}
+];
+
+// Chọn đúng 24 câu viết lại: mỗi dạng 6 câu, đủ 4 nhóm trọng tâm.
+const rewriteOrder = [
+  1,2,3,4,5,21,
+  6,7,8,9,10,29,
+  11,12,13,14,15,37,
+  16,17,18,19,20,44
+];
+const sourceById = new Map(qSource.map(x=>[x.id,x]));
+const rewriteQuestions = rewriteOrder.map((oldId,idx)=>({...sourceById.get(oldId),id:idx+1}));
+
+const mcQuestions = [
+  {id:41,section:"mc",group:"mc",type:"mc",prompt:'Ben said, “I am tired now.” → Ben said that he ______ tired then.',options:["is","was","has been","will be"],answers:["B"],displayAnswer:"B. was",explanation:"am → was khi động từ tường thuật ở quá khứ."},
+  {id:42,section:"mc",group:"mc",type:"mc",prompt:'Nina said that she ______ the project the previous day.',options:["finishes","has finished","had finished","will finish"],answers:["C"],displayAnswer:"C. had finished",explanation:"Hành động quá khứ lùi thành past perfect: had finished."},
+  {id:43,section:"mc",group:"mc",type:"mc",prompt:'Leo said, “I will call you.” → Leo said that he ______ me.',options:["will call","would call","called","had called"],answers:["B"],displayAnswer:"B. would call",explanation:"will → would."},
+  {id:44,section:"mc",group:"mc",type:"mc",prompt:'She said, “I have lived here for three years.” → She said that she ______ there for three years.',options:["lived","has lived","was living","had lived"],answers:["D"],displayAnswer:"D. had lived",explanation:"present perfect → past perfect; here → there."},
+  {id:45,section:"mc",group:"mc",type:"mc",prompt:'The teacher said that the Earth ______ around the Sun.',options:["moved","had moved","moves","would move"],answers:["C"],displayAnswer:"C. moves",explanation:"Sự thật hiển nhiên thường không lùi thì."},
+  {id:46,section:"mc",group:"mc",type:"mc",prompt:'Tom asked me if I ______ help him with the box.',options:["can","could","will","must"],answers:["B"],displayAnswer:"B. could",explanation:"can → could trong câu hỏi gián tiếp."},
+  {id:47,section:"mc",group:"mc",type:"mc",prompt:'The teacher asked Lan where she ______.',options:["does live","is living","lived","did live"],answers:["C"],displayAnswer:"C. lived",explanation:"Câu hỏi gián tiếp dùng trật tự S + V, không dùng do/does/did đảo."},
+  {id:48,section:"mc",group:"mc",type:"mc",prompt:'The manager asked Sara whether she ______ the report.',options:["completes","has completed","would complete","had completed"],answers:["D"],displayAnswer:"D. had completed",explanation:"Have you completed...? → whether she had completed..."},
+  {id:49,section:"mc",group:"mc",type:"mc",prompt:'He asked what time the bus ______ the next day.',options:["leaves","would leave","had left","has left"],answers:["B"],displayAnswer:"B. would leave",explanation:"will leave → would leave."},
+  {id:50,section:"mc",group:"mc",type:"mc",prompt:'Mother asked the children why they ______.',options:["are laughing","have laughed","were laughing","had laughed"],answers:["C"],displayAnswer:"C. were laughing",explanation:"are laughing → were laughing; không đảo trợ động từ."},
+  {id:51,section:"mc",group:"mc",type:"mc",prompt:'Dad told me ______ the door before I left.',options:["to close","closing","close","closed"],answers:["A"],displayAnswer:"A. to close",explanation:"tell + object + to V."},
+  {id:52,section:"mc",group:"mc",type:"mc",prompt:'The guide warned us ______ the old bridge.',options:["to not cross","not to cross","not crossing","don’t cross"],answers:["B"],displayAnswer:"B. not to cross",explanation:"warn + object + not to V."},
+  {id:53,section:"mc",group:"mc",type:"mc",prompt:'The librarian asked the students ______ quiet.',options:["being","be","to be","were"],answers:["C"],displayAnswer:"C. to be",explanation:"ask + object + to V."},
+  {id:54,section:"mc",group:"mc",type:"mc",prompt:'Mum reminded me ______ my keys.',options:["to bring","bringing","bring","brought"],answers:["A"],displayAnswer:"A. to bring",explanation:"remind + object + to V."},
+  {id:55,section:"mc",group:"mc",type:"mc",prompt:'The teacher told the children ______ in the corridor.',options:["don’t run","not run","to not running","not to run"],answers:["D"],displayAnswer:"D. not to run",explanation:"tell + object + not to V."},
+  {id:56,section:"mc",group:"mc",type:"mc",prompt:'The doctor advised him ______ for a few days.',options:["resting","to rest","rest","rested"],answers:["B"],displayAnswer:"B. to rest",explanation:"advise + object + to V."},
+  {id:57,section:"mc",group:"mc",type:"mc",prompt:'Mai promised ______ me after school.',options:["calling","call","to call","called"],answers:["C"],displayAnswer:"C. to call",explanation:"promise + to V."},
+  {id:58,section:"mc",group:"mc",type:"mc",prompt:'They invited us ______ dinner with them.',options:["to have","having","have","had"],answers:["A"],displayAnswer:"A. to have",explanation:"invite + object + to V."},
+  {id:59,section:"mc",group:"mc",type:"mc",prompt:'Nam suggested ______ early to avoid the traffic.',options:["to leave","leave","left","leaving"],answers:["D"],displayAnswer:"D. leaving",explanation:"suggest + V-ing."},
+  {id:60,section:"mc",group:"mc",type:"mc",prompt:'Jack admitted ______ the vase.',options:["to break","breaking","break","broke"],answers:["B"],displayAnswer:"B. breaking",explanation:"admit + V-ing."},
+  {id:61,section:"mc",group:"mc",type:"mc",prompt:'The teacher accused Tom ______ cheating in the test.',options:["for","with","of","about"],answers:["C"],displayAnswer:"C. of",explanation:"accuse + object + of + V-ing."},
+  {id:62,section:"mc",group:"mc",type:"mc",prompt:'Jane apologized ______ being late.',options:["for","to","of","with"],answers:["A"],displayAnswer:"A. for",explanation:"apologize for + V-ing."},
+  {id:63,section:"mc",group:"mc",type:"mc",prompt:'Mark denied ______ the window.',options:["to break","break","broke","breaking"],answers:["D"],displayAnswer:"D. breaking",explanation:"deny + V-ing."},
+  {id:64,section:"mc",group:"mc",type:"mc",prompt:'My teacher encouraged me ______ the speaking competition.',options:["entering","to enter","enter","entered"],answers:["B"],displayAnswer:"B. to enter",explanation:"encourage + object + to V."},
+  {id:65,section:"mc",group:"mc",type:"mc",prompt:'David offered ______ our bags.',options:["carrying","carry","to carry","carried"],answers:["C"],displayAnswer:"C. to carry",explanation:"offer + to V."},
+  {id:66,section:"mc",group:"mc",type:"mc",prompt:'In reported speech, “yesterday” normally changes to ______.',options:["the day before","the next day","that day","the following week"],answers:["A"],displayAnswer:"A. the day before",explanation:"yesterday → the day before/the previous day."},
+  {id:67,section:"mc",group:"mc",type:"mc",prompt:'In reported speech, “tomorrow” normally changes to ______.',options:["the day before","that day","the previous day","the following day"],answers:["D"],displayAnswer:"D. the following day",explanation:"tomorrow → the next/following day."},
+  {id:68,section:"mc",group:"mc",type:"mc",prompt:'In reported speech, “this book” normally changes to ______.',options:["these book","that book","those book","the book here"],answers:["B"],displayAnswer:"B. that book",explanation:"this → that khi thay đổi điểm nhìn."},
+  {id:69,section:"mc",group:"mc",type:"mc",prompt:'She ______ me that she was busy.',options:["said","said to","told","spoke"],answers:["C"],displayAnswer:"C. told",explanation:"tell + object: told me that..."},
+  {id:70,section:"mc",group:"mc",type:"mc",prompt:'Which sentence is correct?',options:["He asked me what was my name.","He asked me what is my name.","He asked me what my name is yesterday.","He asked me what my name was."],answers:["D"],displayAnswer:"D. He asked me what my name was.",explanation:"WH-question gián tiếp dùng trật tự S + V và lùi is → was."}
+];
+
+// 6 câu MCQ được chọn để phủ đủ: lùi thì, câu hỏi, mệnh lệnh, reporting verbs và đổi trạng từ.
+const mcPickIds = [41,46,51,56,59,66];
+const mcById = new Map(mcQuestions.map(x=>[x.id,x]));
+const selectedMcQuestions = mcPickIds.map((oldId,idx)=>({...mcById.get(oldId),id:25+idx}));
+const q = [...rewriteQuestions,...selectedMcQuestions];
+
+const correctionBanks = {
+  statements:[
+    {p:'Nina said, “I am tired now.”',a:["nina said that she was tired then","nina said she was tired then"],d:"Nina said (that) she was tired then.",h:"am → was; now → then."},
+    {p:'Leo said, “I have finished my work.”',a:["leo said that he had finished his work","leo said he had finished his work"],d:"Leo said (that) he had finished his work.",h:"have finished → had finished."}
+  ],
+  questions:[
+    {p:'Anna asked me, “Do you like science?”',a:["anna asked me if i liked science","anna asked me whether i liked science"],d:"Anna asked me if/whether I liked science.",h:"Yes/No question: if/whether + S + V."},
+    {p:'Dad asked Ben, “Where are you going?”',a:["dad asked ben where he was going"],d:"Dad asked Ben where he was going.",h:"Giữ where; không đảo trợ động từ."}
+  ],
+  commands:[
+    {p:'Mum told me, “Clean your desk.”',a:["mum told me to clean my desk","mom told me to clean my desk"],d:"Mum told me to clean my desk.",h:"told + object + to V."},
+    {p:'The guard told us, “Don’t enter this room.”',a:["the guard told us not to enter that room","the guard told us not to enter this room"],d:"The guard told us not to enter that room.",h:"told + object + not to V."}
+  ],
+  verbs:[
+    {p:'“You should exercise more,” she said to him. (ADVISED)',a:["she advised him to exercise more"],d:"She advised him to exercise more.",h:"advise + object + to V."},
+    {p:'“I will call you tonight,” Ben said to Mia. (PROMISED)',a:["ben promised to call mia that night"],d:"Ben promised to call Mia that night.",h:"promise + to V; tonight → that night."}
+  ],
+  mc:[
+    {p:'Rewrite: Peter asked me, “Do you understand this rule?”',a:["peter asked me if i understood that rule","peter asked me whether i understood that rule"],d:"Peter asked me if/whether I understood that rule.",h:"Yes/No question: if/whether + S + V; this → that."},
+    {p:'Rewrite: The teacher told us, “Don’t talk.”',a:["the teacher told us not to talk"],d:"The teacher told us not to talk.",h:"tell + object + not to V."}
+  ]
+};
+
+const state={
+  started:false,submitted:false,timeLeft:TOTAL_TIME,timerId:null,
+  answers:{},reviewChecks:{},correctionAnswers:{},correctionAttempt:0,
+  correctionStarted:false,completed:false,submittedAt:null,completedAt:null,
+  attemptId:null,sentEvents:{},warningsShown:{}
+};
+
+const $=id=>document.getElementById(id);
+
+function normalize(v){
+  return String(v??"").toLowerCase().normalize("NFKC")
+    .replace(/[’‘`´]/g,"'")
+    .replace(/[.,!?;:\"“”()[\]{}]/g," ")
+    .replace(/\s+/g," ").trim();
+}
+function esc(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
+function isAnswered(i){const v=state.answers[i.id];return v!==undefined&&v!==null&&String(v).trim()!==""}
+function isCorrect(i){if(!isAnswered(i))return false;const v=normalize(state.answers[i.id]);return i.answers.map(normalize).includes(v)}
+function stats(){const correct=q.filter(isCorrect).length;return {correct,score:correct/q.length*10}}
+function answeredCount(){return q.filter(isAnswered).length}
+function wrongItems(){return q.filter(x=>!isCorrect(x))}
+function formatTime(sec){sec=Math.max(0,sec);return `${String(Math.floor(sec/60)).padStart(2,"0")}:${String(sec%60).padStart(2,"0")}`}
+function sheetConfigured(){return WEB_APP_URL.startsWith("https://script.google.com/")&&WEB_APP_URL.includes("/exec")}
+function makeAttemptId(){return `${QUIZ_ID}-${Date.now()}-${Math.random().toString(36).slice(2,8).toUpperCase()}`}
+
+function updateSheetConnection(text,type="info"){
+  const el=$("sheetConnection");
+  const styles={ok:["#eaf8f0","#16794b","#a9dfc3"],warn:["#fff6dd","#9a6700","#ead18c"],bad:["#fff0ee","#b42318","#f0b8b3"],info:["#fbfcff","#667085","#c8d2e2"]};
+  const [bg,color,border]=styles[type]||styles.info;
+  if(el){el.textContent=text;el.style.background=bg;el.style.color=color;el.style.borderColor=border}
+  const f=$("cloudFinalText");if(f)f.textContent=text;
+}
+
+function showToast(msg,kind="warning",ms=6500){
+  const t=$("toast");t.textContent=msg;t.className=`toast show ${kind}`;
+  clearTimeout(showToast._t);showToast._t=setTimeout(()=>t.className="toast",ms);
+}
+
+function reportStatus(){
+  const {score}=stats(),w=wrongItems();
+  if(!state.submitted) return "ĐANG LÀM";
+  if(score<PASS_SCORE) return "ĐÃ NỘP BÀI - CHƯA ĐẠT";
+  if(!w.length) return "HOÀN THÀNH, KHÔNG CẦN CORRECTION CHECK";
+  if(state.completed) return "ĐÃ HOÀN THÀNH CORRECTION CHECK";
+  if(state.correctionStarted) return "ĐÃ NỘP BÀI - ĐANG CORRECTION CHECK";
+  return "ĐÃ NỘP BÀI - CHƯA HOÀN THÀNH CORRECTION CHECK";
+}
+
+function cloudPayload(eventType,statusOverride=null){
+  const {correct,score}=stats(),w=wrongItems();
+  return {
+    eventType,
+    event:eventType,
+    quizId:QUIZ_ID,
+    quizTitle:QUIZ_TITLE,
+    attemptId:state.attemptId||"",
+    studentCode:$("studentCode")?.value.trim()||"",
+    studentName:$("studentName").value.trim(),
+    studentClass:$("studentClass").value.trim(),
+    score:Number(score.toFixed(2)),
+    correct,
+    total:q.length,
+    wrongCount:w.length,
+    wrongQuestions:w.map(x=>x.id).join(", "),
+    status:statusOverride||reportStatus(),
+    reportStatus:statusOverride||reportStatus(),
+    submissionStatus:state.submitted?"ĐÃ NỘP BÀI":"ĐANG LÀM",
+    correctionStatus:state.completed?"ĐÃ HOÀN THÀNH CORRECTION CHECK":state.correctionStarted?"ĐANG LÀM CORRECTION CHECK":"CHƯA MỞ CORRECTION CHECK",
+    reviewReadCount:w.filter(i=>!!state.reviewChecks[i.id]).length,
+    correctionAttempt:state.correctionAttempt,
+    reviewCompleted:!!state.completed,
+    durationSeconds:TOTAL_TIME-state.timeLeft,
+    durationText:formatTime(TOTAL_TIME-state.timeLeft),
+    submittedAt:state.submittedAt||"",
+    completedAt:state.completedAt||"",
+    clientTime:new Date().toISOString()
+  };
+}
+
+async function sendToTeacher(eventType,statusOverride=null,force=false){
+  if(!sheetConfigured()){updateSheetConnection("Chưa kết nối Google Sheet","warn");return false}
+  const k=`${state.attemptId||"noattempt"}:${eventType}:${statusOverride||""}`;
+  if(!force&&state.sentEvents[k]) return true;
+  updateSheetConnection("Đang gửi kết quả về Google Sheet…","info");
+  try{
+    await fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(cloudPayload(eventType,statusOverride)),cache:"no-store"});
+    state.sentEvents[k]=new Date().toISOString();
+    save(false);
+    updateSheetConnection("✓ Đã gửi về Google Sheet","ok");
+    return true;
+  }catch(e){updateSheetConnection("Không gửi được – kiểm tra Internet rồi bấm Gửi lại","bad");return false}
+}
+
+function render(){
+  const box=$("questions"),pal=$("palette"),sn=$("sectionNav");
+  box.innerHTML="";pal.innerHTML="";sn.innerHTML="";
+  sections.forEach(sec=>{
+    const title=document.createElement("div");
+    title.className="section-title";title.id=`sec-${sec.id}`;title.textContent=sec.title;box.appendChild(title);
+
+    q.filter(x=>x.section===sec.id).forEach(item=>{
+      const card=document.createElement("article");
+      card.className="question-card card";card.id=`q-${item.id}`;card.dataset.qid=item.id;
+      const answerHtml=item.type==="mc"
+        ? `<div class="mc-options">${item.options.map((opt,j)=>{const letter=String.fromCharCode(65+j);return `<label class="mc-option"><input type="radio" name="q${item.id}" data-q="${item.id}" value="${letter}" ${state.answers[item.id]===letter?"checked":""}><span><b>${letter}.</b> ${esc(opt)}</span></label>`}).join("")}</div>`
+        : `<input class="text-answer" type="text" data-q="${item.id}" value="${esc(state.answers[item.id]||"")}" placeholder="Viết câu gián tiếp hoàn chỉnh...">`;
+      const helperHtml=item.type==="mc"
+        ? `Chọn một đáp án đúng nhất.`
+        : `Không trừ điểm vì viết hoa/viết thường, dấu câu cuối câu hoặc khoảng trắng thừa. Hãy chú ý đổi thì, đại từ và trạng từ thời gian khi cần.`;
+      card.innerHTML=`<div class="qhead"><div class="qnum">Câu ${item.id}</div><span class="topic-badge">${esc(groups[item.group].title)}</span></div>
+      <div class="instruction">${esc(item.instruction||(item.type==="mc"?"CHỌN ĐÁP ÁN ĐÚNG":"VIẾT LẠI CÂU HOÀN CHỈNH"))}</div>
+      <div class="prompt">${esc(item.prompt)}</div>
+      ${answerHtml}
+      <div class="helper">${helperHtml}</div>`;
+      box.appendChild(card);
+
+      const nav=document.createElement("button");
+      nav.className="qnav";nav.type="button";nav.dataset.qid=item.id;nav.textContent=item.id;
+      nav.onclick=()=>card.scrollIntoView({behavior:"smooth",block:"start"});
+      pal.appendChild(nav);
+    });
+
+    const b=document.createElement("button");b.type="button";b.textContent=sec.title;
+    b.onclick=()=>title.scrollIntoView({behavior:"smooth",block:"start"});
+    sn.appendChild(b);
+  });
+
+  document.querySelectorAll("[data-q]").forEach(el=>el.oninput=e=>{
+    state.answers[Number(e.target.dataset.q)]=e.target.value;update();save(false);
+  });
+  update();observe();
+}
+
+function observe(){
+  if(!("IntersectionObserver" in window))return;
+  const ob=new IntersectionObserver(es=>es.forEach(en=>{
+    if(en.isIntersecting){
+      document.querySelectorAll(".qnav").forEach(b=>b.classList.remove("active"));
+      document.querySelector(`.qnav[data-qid="${en.target.dataset.qid}"]`)?.classList.add("active");
+    }
+  }),{rootMargin:"-20% 0px -65% 0px"});
+  document.querySelectorAll(".question-card").forEach(c=>ob.observe(c));
+}
+
+function update(){
+  const a=answeredCount();
+  $("answeredStat").textContent=`${a}/${q.length}`;
+  $("progressText").textContent=`Đã trả lời ${a}/${q.length} câu`;
+  $("progressBar").style.width=`${a/q.length*100}%`;
+  document.querySelectorAll(".qnav").forEach(b=>{
+    const item=q.find(x=>x.id===Number(b.dataset.qid));
+    b.classList.toggle("answered",isAnswered(item));
+  });
+}
+
+function tick(){
+  state.timeLeft--;
+  $("timer").textContent=formatTime(state.timeLeft);
+  if(state.timeLeft===60&&!state.warningsShown.one){
+    state.warningsShown.one=true;showToast("⚠️ Còn 1 phút. Hệ thống sẽ tự nộp khi hết giờ.","danger",8000);
+  }
+  if(state.timeLeft<=0){
+    clearInterval(state.timerId);state.timerId=null;
+    if(!state.submitted) submit(true);
+  }
+}
+
+function start(){
+  if(!$("studentName").value.trim()||!$("studentClass").value.trim()){alert("Vui lòng nhập đầy đủ Họ và tên và Lớp.");return}
+  Object.assign(state,{started:true,submitted:false,timeLeft:TOTAL_TIME,answers:{},reviewChecks:{},correctionAnswers:{},correctionAttempt:0,correctionStarted:false,completed:false,submittedAt:null,completedAt:null,attemptId:makeAttemptId(),sentEvents:{},warningsShown:{}});
+  $("setup").classList.add("hidden");$("guide").classList.add("hidden");$("quizArea").style.display="block";$("result").style.display="none";$("timer").textContent=formatTime(TOTAL_TIME);$("statusStat").textContent="Đang làm";
+  render();state.timerId=setInterval(tick,1000);save(false);window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function reviewItem(item){
+  const ua=isAnswered(item)?state.answers[item.id]:"(Bỏ trống)";
+  return `<article class="review-item wrong"><h4>Câu ${item.id} • ${esc(groups[item.group].title)} • CẦN SỬA</h4>
+  <p>${esc(item.prompt)}</p>
+  <p><b>Em trả lời:</b> ${esc(ua)}</p>
+  <p><b>Đáp án đúng:</b> ${esc(item.displayAnswer)}</p>
+  <p><b>Giải thích:</b> ${esc(item.explanation)}</p>
+  <p><b>Điểm cần nhớ:</b> ${esc(groups[item.group].review)}</p>
+  <label class="review-confirm"><input type="checkbox" data-review-check="${item.id}" ${state.reviewChecks[item.id]?"checked":""}> <span>Tôi đã đọc phần chữa của câu này và hiểu vì sao đáp án cũ sai.</span></label>
+  </article>`;
+}
+
+function buildCorrectionItems(items){
+  return items.map((item,idx)=>{
+    const bank=correctionBanks[item.group];
+    const v=bank[(item.id-1) % bank.length];
+    return {...v,originalId:item.id,group:item.group,key:`c${item.id}`};
+  });
+}
+
+function correctionIsCorrect(v,item){const x=normalize(v);return item.a.map(normalize).includes(x)}
+function allReviewChecked(items){return items.every(i=>!!state.reviewChecks[i.id])}
+
+function completionCode(){
+  const {score}=stats();
+  const base=`${$("studentName").value.trim()}|${$("studentClass").value.trim()}|${score.toFixed(2)}|${wrongItems().map(x=>x.id).join("-")}|${state.correctionAttempt}|${state.completedAt||""}`;
+  let h=2166136261;for(let i=0;i<base.length;i++){h^=base.charCodeAt(i);h=Math.imul(h,16777619)}
+  return `G9RS-${(h>>>0).toString(36).toUpperCase().padStart(7,"0")}`;
+}
+
+function teacherReportText(){
+  const {correct,score}=stats(),w=wrongItems();
+  return `GRADE 9 - REPORTED SPEECH REPORT
+Học sinh: ${$("studentName").value.trim()}
+Lớp: ${$("studentClass").value.trim()}
+Điểm: ${score.toFixed(2)} (${correct}/${q.length})
+Thời gian: ${formatTime(TOTAL_TIME-state.timeLeft)}
+Câu sai: ${w.length?w.map(x=>x.id).join(", "):"Không có"}
+Trạng thái: ${reportStatus()}
+Mã xác nhận: ${state.completed?completionCode():"—"}`;
+}
+
+function renderCompletion(){
+  const m=$("completionMount");if(!m)return;
+  const {score}=stats(),w=wrongItems();
+  const noCorrection=!w.length;
+  m.innerHTML=`<div class="completion-banner">
+    <h3>${noCorrection?"✅ HOÀN THÀNH BÀI":"✅ ĐÃ HOÀN THÀNH CORRECTION CHECK"}</h3>
+    <p>${noCorrection?"Bài không có câu sai nên không cần Correction Check.":"Em đã đọc phần chữa và làm đúng 100% Correction Check."}</p>
+    <div class="teacher-report">
+      <p><b>Trạng thái:</b> ${reportStatus()}</p>
+      <p><b>Điểm:</b> ${score.toFixed(2)}</p>
+      <p><b>Số câu sai:</b> ${w.length}</p>
+      <p><b>Số lượt Correction Check:</b> ${state.correctionAttempt}</p>
+      <p><b>Mã xác nhận:</b> <span class="verify-code">${completionCode()}</span></p>
+    </div>
+    <div class="actions no-print">
+      <button class="btn btn-success" id="copyReportBtn">Copy báo cáo</button>
+      <button class="btn btn-secondary" id="resendBtn2">Gửi lại Google Sheet</button>
+      <button class="btn btn-primary" id="retryBtn2">Làm lại bài</button>
+    </div>
+  </div>`;
+  $("copyReportBtn").onclick=async()=>{try{await navigator.clipboard.writeText(teacherReportText());alert("Đã copy báo cáo.")}catch(e){prompt("Copy báo cáo:",teacherReportText())}};
+  $("resendBtn2").onclick=()=>sendToTeacher(state.completed?"REVIEW_COMPLETED":"SUBMIT_RESULT",reportStatus(),true);
+  $("retryBtn2").onclick=retry;
+}
+
+function renderCorrection(items){
+  const m=$("correctionMount");if(!m)return;
+  const checks=buildCorrectionItems(items);
+  let h=`<section class="correction-area">
+    <h3>BƯỚC 2 — CORRECTION CHECK</h3>
+    <div class="alert warn">
+      <b>Ghi chú:</b> Viết lại <b>toàn bộ câu gián tiếp hoàn chỉnh</b>. Không trừ điểm vì viết hoa/viết thường, dấu câu cuối câu hoặc khoảng trắng thừa.
+      Cần đúng <b>100%</b> để hoàn thành Correction Check.
+    </div>
+    <div id="correctionFeedback"></div>
+    <div class="correction-list">`;
+  checks.forEach((c,idx)=>{
+    const val=state.correctionAnswers[c.originalId]||"";
+    const ok=val&&correctionIsCorrect(val,c);
+    h+=`<article class="correction-card ${ok?"good":""}">
+      <h4>Check ${idx+1} • ôn lỗi ở Câu ${c.originalId}</h4>
+      <div class="instruction">VIẾT LẠI CÂU HOÀN CHỈNH</div>
+      <p><b>${esc(c.p)}</b></p>
+      <input type="text" data-c-input="${c.originalId}" value="${esc(val)}" ${ok?"disabled":""} placeholder="Chỉ nhập phần còn thiếu...">
+      <div class="helper">Nhập toàn bộ câu gián tiếp hoàn chỉnh.</div>
+      ${ok?"<p><b>✅ Đã sửa đúng.</b></p>":""}
+    </article>`;
+  });
+  h+=`</div><div class="actions"><button class="btn btn-primary" id="submitCorrectionBtn" ${state.completed?"disabled":""}>Kiểm tra phần sửa lỗi</button></div></section>`;
+  m.innerHTML=h;
+  document.querySelectorAll("[data-c-input]").forEach(inp=>inp.oninput=e=>{state.correctionAnswers[e.target.dataset.cInput]=e.target.value;save(false)});
+  $("submitCorrectionBtn").onclick=()=>submitCorrection(items);
+}
+
+async function submitCorrection(items){
+  if(state.completed)return;
+  const checks=buildCorrectionItems(items);
+  state.correctionAttempt++;
+  const bad=checks.filter(c=>!correctionIsCorrect(state.correctionAnswers[c.originalId]||"",c));
+  if(!bad.length){
+    state.completed=true;state.completedAt=new Date().toISOString();
+    $("statusStat").textContent="ĐÃ HOÀN THÀNH CORRECTION CHECK";
+    save(false);renderCorrection(items);renderCompletion();
+    await sendToTeacher("REVIEW_COMPLETED","ĐÃ HOÀN THÀNH CORRECTION CHECK",true);
+    return;
+  }
+  bad.forEach(c=>state.correctionAnswers[c.originalId]="");
+  save(false);renderCorrection(items);
+  const f=$("correctionFeedback");
+  if(f)f.innerHTML=`<div class="alert warn"><b>Lượt ${state.correctionAttempt}: còn ${bad.length} câu chưa đúng.</b><br>${bad.map(c=>`• Câu ${c.originalId}: ${esc(c.h)}`).join("<br>")}</div>`;
+  $("statusStat").textContent="ĐÃ NỘP BÀI - ĐANG CORRECTION CHECK";
+  await sendToTeacher("CORRECTION_PROGRESS","ĐÃ NỘP BÀI - ĐANG CORRECTION CHECK",true);
+}
+
+function bindReview(items){
+  document.querySelectorAll("[data-review-check]").forEach(cb=>cb.onchange=e=>{
+    state.reviewChecks[e.target.dataset.reviewCheck]=e.target.checked;
+    const b=$("startCorrectionBtn");if(b)b.disabled=!allReviewChecked(items);
+    save(false);
+  });
+  const b=$("startCorrectionBtn");
+  if(b){
+    b.disabled=!allReviewChecked(items);
+    b.onclick=async()=>{
+      state.correctionStarted=true;
+      $("statusStat").textContent="ĐÃ NỘP BÀI - ĐANG CORRECTION CHECK";
+      save(false);
+      await sendToTeacher("CORRECTION_START","ĐÃ NỘP BÀI - ĐANG CORRECTION CHECK",true);
+      renderCorrection(items);
+      $("correctionMount")?.scrollIntoView({behavior:"smooth",block:"start"});
+    };
+  }
+}
+
+function renderResult(){
+  const {correct,score}=stats(),w=wrongItems(),passed=score>=PASS_SCORE;
+  $("liveScore").textContent=score.toFixed(2);
+  $("statusStat").textContent=reportStatus();
+
+  let html=`<div class="result-top">
+    <div class="score-ring" style="background:conic-gradient(${passed?"#16794b":"#b42318"} ${Math.min(score,10)*10}%,#e9eef6 0)">
+      <div class="score-inner"><strong>${score.toFixed(2)}</strong><span>/10</span></div>
+    </div>
+    <div>
+      <span class="status ${passed?"pass":"fail"}">${passed?"ĐẠT":"CHƯA ĐẠT"}</span>
+      <h2>Kết quả lần nộp</h2>
+      <p><b>${correct}/${q.length}</b> câu đúng.</p>
+      <p><b>Trạng thái:</b> ${esc(reportStatus())}</p>
+    </div>
+  </div>`;
+
+  if(score<PASS_SCORE){
+    html+=`<div class="alert fail"><b>Điểm dưới 7.0.</b> Hệ thống chưa mở đáp án. Hãy ôn lại các quy tắc so sánh hơn rồi làm lại bài.</div>
+    <div class="alert warn"><b>Cần ôn:</b> ${esc([...new Set(w.map(x=>groups[x.group].review))].join(" "))}</div>
+    <div class="actions no-print"><button class="btn btn-primary" id="retryBtn">Làm lại bài</button><button class="btn btn-secondary" id="resendBtn">Gửi lại Google Sheet</button></div>`;
+  } else if(!w.length){
+    html+=`<div id="completionMount"></div>`;
+  } else {
+    html+=`<div class="mastery-steps">
+      <div class="mastery-step"><strong>BƯỚC 1</strong>Đọc phần chữa từng câu sai.</div>
+      <div class="mastery-step"><strong>BƯỚC 2</strong>Tích xác nhận đã hiểu lỗi.</div>
+      <div class="mastery-step"><strong>BƯỚC 3</strong>Làm Correction Check đúng 100%.</div>
+    </div>
+    <h3>BƯỚC 1 — XEM VÀ HIỂU LỖI</h3>
+    <div class="review-list">${w.map(reviewItem).join("")}</div>
+    <div class="actions"><button class="btn btn-primary" id="startCorrectionBtn" disabled>Bắt đầu Correction Check</button></div>
+    <div id="correctionMount"></div>
+    <div id="completionMount"></div>`;
+  }
+
+  $("result").innerHTML=html;
+  $("result").style.display="block";
+
+  if(score<PASS_SCORE){
+    $("retryBtn").onclick=retry;
+    $("resendBtn").onclick=()=>sendToTeacher("SUBMIT_RESULT",reportStatus(),true);
+  } else if(!w.length){
+    state.completed=true;state.completedAt=new Date().toISOString();
+    renderCompletion();
+  } else {
+    bindReview(w);
+  }
+}
+
+async function submit(auto=false){
+  if(state.submitted)return;
+  const unanswered=q.length-answeredCount();
+  if(!auto&&unanswered>0&&!confirm(`Em còn ${unanswered} câu chưa trả lời. Vẫn nộp bài?`))return;
+  state.submitted=true;state.submittedAt=new Date().toISOString();
+  clearInterval(state.timerId);state.timerId=null;
+
+  $("statusStat").textContent="ĐÃ NỘP BÀI";
+  await sendToTeacher("SUBMIT_CLICK","ĐÃ NỘP BÀI",true);
+
+  $("quizArea").style.display="none";
+  renderResult();
+
+  await sendToTeacher("SUBMIT_RESULT",reportStatus(),true);
+}
+
+function retry(){
+  clearInterval(state.timerId);
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
+}
+
+function save(showMsg=true){
+  const data={
+    state:{
+      ...state,
+      timerId:null
+    },
+    studentName:$("studentName")?.value||"",
+    studentClass:$("studentClass")?.value||"",
+    studentCode:$("studentCode")?.value||""
+  };
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+  if(showMsg) alert("Đã lưu tạm trên máy.");
+}
+
+$("startBtn").onclick=start;
+$("submitBtn").onclick=()=>submit(false);
+$("saveBtn").onclick=()=>save(true);
+updateSheetConnection(sheetConfigured()?"✓ Đã cấu hình Google Sheet":"Chưa cấu hình Google Sheet",sheetConfigured()?"ok":"warn");
+})();
+</script>
+</body>
+</html>
